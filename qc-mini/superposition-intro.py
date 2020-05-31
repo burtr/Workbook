@@ -1,12 +1,3 @@
-
-
-# Quantum circuit to demonstrate superposition
-# burton rosenberg
-# may 2020
-
-
-
-# Importing standard Qiskit libraries and configuring account
 from qiskit import QuantumCircuit, execute, Aer, IBMQ
 from qiskit.compiler import transpile, assemble
 from qiskit.tools.jupyter import *
@@ -14,14 +5,25 @@ from qiskit.visualization import *
 from qiskit.providers.jobstatus import JOB_FINAL_STATES, JobStatus
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister, execute, Aer
 import time
+import argparse
 
+#
+# superposition-intro.py
+# Quantum circuit to demonstrate superposition
+#
+# author: burt rosenberg
+# date: may 2020
+# last update:
+#
 
-# Saving or Loading IBM Q account(s)
-#IBMQ.save_account('MY_API_TOKEN') # only needs to be done once
-provider = IBMQ.load_account()
+args_g = 0  # args are global
 
-
-# a helper function
+def load_or_save_IBMQ_account(api_token=None):
+	if api_token:
+		# only needs to be done once
+		IBMQ.save_account(api_token)
+	provider = IBMQ.load_account()
+	return provider
 
 def wait_for_job(backend, job, wait_interval=5):
 	retrieved_job = backend.retrieve_job(job.job_id())
@@ -33,33 +35,38 @@ def wait_for_job(backend, job, wait_interval=5):
 		time.sleep(wait_interval)
 		job_status = job.status()
 
+def parse_args(back_ends):
+	parser = argparse.ArgumentParser(description="Quantum circuit to demonstrate superposition")
+	parser.add_argument('backend', choices=back_ends, help='ibmq backend')
+	parser.add_argument("-o", "--output_drawing", action="store_true", help="output drawing of the circuit")
+	return parser.parse_args()
 
-# Define the Quantum and Classical Registers
-q = QuantumRegister(1)
-c = ClassicalRegister(1)
+def main(argv):
+	global args_g
 
-# Build the circuit
-superposition_state = QuantumCircuit(q, c)
-superposition_state.h(q)
-superposition_state.measure(q, c)
+	provider = load_or_save_IBMQ_account()
+	back_ends = [be.name() for be in provider.backends()]
+	args_g = parse_args(back_ends)
 
-# draw the circuit
-#draw_circuit = False
-draw_circuit = True
-if draw_circuit:
-	superposition_state.draw(output='mpl').savefig("myfile.png", dpi=150)
+	q = QuantumRegister(1)
+	c = ClassicalRegister(1)
+	superposition_state = QuantumCircuit(q, c)
+	superposition_state.h(q)
+	superposition_state.measure(q, c)
 
-# Execute the circuit
-backend = provider.backends.ibmq_london
-qobj = assemble(transpile(superposition_state, backend=backend), backend=backend)
-job = backend.run(qobj)
-retrieved_job = backend.retrieve_job(job.job_id())
+	if args_g.output_drawing:
+		superposition_state.draw(output='mpl').savefig("circuit.png", dpi=150)
 
-# Wait for completetion
-wait_for_job(backend, job)
+	backend = provider.get_backend(args_g.backend)
+	qobj = assemble(transpile(superposition_state, backend=backend), backend=backend)
+	job = backend.run(qobj)
+	retrieved_job = backend.retrieve_job(job.job_id())
 
-result = job.result()
-print(result.get_counts())
+	wait_for_job(backend, job)
+	result = job.result()
+	print(result.get_counts())
+
+main(sys.argv)
 
 # ran on 28 april 2020
 # program prints:
