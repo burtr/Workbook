@@ -35,18 +35,33 @@ def wait_for_job(backend, job, wait_interval=5):
 		time.sleep(wait_interval)
 		job_status = job.status()
 
-def parse_args(back_ends):
+def parse_args():
 	parser = argparse.ArgumentParser(description="Quantum circuit to demonstrate superposition")
-	parser.add_argument('backend', choices=back_ends, help='ibmq backend')
-	parser.add_argument("-o", "--output_drawing", action="store_true", help="output drawing of the circuit")
+	parser.add_argument('-b','--backend', help='ibmq backend')
+	parser.add_argument("-L", "--list_backends", action="store_true", help="list the available backends")
+	parser.add_argument("-o", "--output_drawing", help="output drawing of the circuit")
 	return parser.parse_args()
 
 def main(argv):
 	global args_g
+	args_g = parse_args()
 
 	provider = load_or_save_IBMQ_account()
-	back_ends = [be.name() for be in provider.backends()]
-	args_g = parse_args(back_ends)
+	backends = provider.backends()
+	if args_g.list_backends:
+		print('backends available:')
+		for be in backends:
+			st = be.status()
+			if st.operational:
+				print(f'\t{be.name()}, pending jobs:{st.pending_jobs}')
+		exit(0)
+	if args_g.backend == None:
+		backend =  backends[0].name()
+	elif args_g.backend not in [be.name() for be in backends]:
+		print('unknown backend')
+		exit(0)
+	else:
+		backend = args_g.backend
 
 	q = QuantumRegister(1)
 	c = ClassicalRegister(1)
@@ -55,9 +70,9 @@ def main(argv):
 	superposition_state.measure(q, c)
 
 	if args_g.output_drawing:
-		superposition_state.draw(output='mpl').savefig("circuit.png", dpi=150)
+		superposition_state.draw(output='mpl').savefig('qc_circuit.png', dpi=150)
 
-	backend = provider.get_backend(args_g.backend)
+	backend = provider.get_backend(backend)
 	qobj = assemble(transpile(superposition_state, backend=backend), backend=backend)
 	job = backend.run(qobj)
 	retrieved_job = backend.retrieve_job(job.job_id())
