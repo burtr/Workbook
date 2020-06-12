@@ -30,7 +30,8 @@ def wait_for_job(backend, job, wait_interval=5):
 	start_time = time.time()
 	job_status = job.status()
 	while job_status not in JOB_FINAL_STATES:
-		print(f'Status @ {time.time() - start_time:0.0f} s: {job_status.name},'
+		if args_g.verbose:
+			print(f'Status @ {time.time() - start_time:0.0f} s: {job_status.name},'
 			  f' est. queue position: {job.queue_position()}')
 		time.sleep(wait_interval)
 		job_status = job.status()
@@ -40,13 +41,16 @@ def parse_args():
 	parser.add_argument('-b','--backend', help='ibmq backend')
 	parser.add_argument("-L", "--list_backends", action="store_true", help="list the available backends")
 	parser.add_argument("-o", "--output_drawing", help="output drawing of the circuit")
+	parser.add_argument('-v', '--verbose', action='store_true', help='verbose output')
 	return parser.parse_args()
 
 def main(argv):
 	global args_g
 	args_g = parse_args()
 
+	if args_g.verbose: print('Opening account ... ')
 	provider = load_or_save_IBMQ_account()
+	if args_g.verbose: print('Getting backends ...')
 	backends = provider.backends()
 	if args_g.list_backends:
 		print('backends available:')
@@ -62,6 +66,7 @@ def main(argv):
 		exit(0)
 	else:
 		backend = args_g.backend
+	if args_g.verbose: print(f'Using backend: {backend}')
 
 	q = QuantumRegister(1)
 	c = ClassicalRegister(1)
@@ -69,17 +74,26 @@ def main(argv):
 	superposition_state.h(q)
 	superposition_state.measure(q, c)
 
+	if args_g.verbose:
+		print(superposition_state.draw(output='text'))
+
 	if args_g.output_drawing:
 		superposition_state.draw(output='mpl').savefig('qc_circuit.png', dpi=150)
 
+	
 	backend = provider.get_backend(backend)
 	qobj = assemble(transpile(superposition_state, backend=backend), backend=backend)
+	if args_g.verbose: print('Submitting job ...')
 	job = backend.run(qobj)
 	retrieved_job = backend.retrieve_job(job.job_id())
 
 	wait_for_job(backend, job)
 	result = job.result()
-	print(result.get_counts())
+	if args_g.verbose: 
+		print(f'results: {result.get_counts()}')
+	else:
+		print(result.get_counts())
+	if args_g.verbose: print('Done!')
 
 main(sys.argv)
 
