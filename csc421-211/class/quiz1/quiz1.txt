@@ -1,0 +1,85 @@
+QUIZ 1
+
+Name:
+Grade:
+
+Date out: 10 Sep 2021
+Date due: 17 Sep 2021
+
+In this quiz you will investigate how functions are called and how local variables
+are allocated. You will investigate:
+
+- How the paramaters are placed on the stack.
+- How local variables of storage type "automatic" are allocated on the stack.
+- How the return address of the calling program is on the stack.
+- How a base pointer chains together nested stack frames.
+
+He goal is to "stack-hop". Standard calls push stack frames onto the stack as
+calls are made, and pop them off as the functions return. All this information 
+is on the stack, so it is possible (with a bit of ingenuity) to manipulate this
+information using pointers.
+
+
+--> In particular, we can arrange that we return not to the called, but to some other
+--> function by replacing a return address with a starting address of that function.
+
+Your quiz is to exam the output of the program simple-stack-trace.c, and thereby 
+understand what location you need to overwrite with the alternate address.
+
+Here are some things to look for:
+
+- The local variables are on the stack, and then are the number 5, 4, 3, 2, 1 and 0.
+  You can look for these numbers.
+- The base pointers are on the stack, and they are adresses on the stack forming a
+  chain. You can look for values that are slightly larger than the address where the
+  value is located, and going there, seeing if that number is also a stack address.
+- The return addresses will be just above each base pointer and will be equal. Look
+  for a repeated number, at a consistent number of locations above the base number.
+  
+How do you get your stack address? Use & on any local variable. Local variables are
+automatic. That means they are on the stack. 
+
+How do you move around the stack? With any luck stack elements are integer sized, so 
+using an positive index on the pointer will point your to things higher (deeper) on 
+the stack.
+
+Inspiration? Dan Capps of NetApps sent me the program don_capps_stackslam.c. It 
+works on some machines but not others. Architectures can vary on how they layout the
+stack. While this particular program does not work on all architectures, it works 
+on some.
+
+You need to look at:
+
+- The output of simple-stack-trace.c to puzzle out the stack arrangement on the
+  machine you will attempt your stack-hop.
+  See: https://www.cs.miami.edu/home/burt/learning/Csc421.171/workbook/stack-memory.html
+  
+- Add one line to file stack-hopping.c to accomplish the trick.
+
+- Look at sample-answer.txt for what a stack hop looks like.
+
+- The Makefile has targets to organize your work.
+
+
+REFERENCES:
+
+- https://inst.eecs.berkeley.edu/~cs161/fa08/papers/stack_smashing.pdf
+  1996 Phrack article by Elias Levi, a.k.a. Aleph One.
+
+- https://www.cs.miami.edu/home/burt/learning/Csc421.171/workbook/stack-memory.html
+
+- https://www.cs.miami.edu/home/burt/learning/Csc521.141/Documents/64-ia-32-architectures-software-developer-vol-1-manual.pdf
+  Chapter 6.
+  
+- https://en.wikipedia.org/wiki/Morris_worm
+  Robert Morris and the first internet virus, used a stack smash, 1998.
+
+  
+  
+
+
+
+
+
+
+

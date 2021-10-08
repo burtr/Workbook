@@ -1,0 +1,28 @@
+ioc: 16 1 0 0
+enq: a
+enq: b
+enq: c
+enq: d
+enq: e
+enq: f
+enq: g
+enq: h
+enq: i
+enq: j
+enq: k
+enq: l
+enq: m
+enq: n
+enq: o
+ioc: 16 0 0 15
+enq: p
+enq: full
+deq: a
+enq: r
+enq: full
+deq: b
+deq: c
+enq: t
+enq: u
+enq: full
+ioc: 16 0 1 16

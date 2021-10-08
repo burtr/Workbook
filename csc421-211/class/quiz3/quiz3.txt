@@ -1,0 +1,46 @@
+QUIZ 3
+
+Name:
+Grade:
+
+Date out: 6 oct
+Date due: 13 oct
+
+Read the first two chapters in Allen Downey's book, The
+Little Book of Semaphores.
+
+Answer the "Puzzles", which are found on,
+
+1) Page 2.
+      Assuming that Bob is willing to follow simple instructions, is 
+      there any way you can guarantee that tomorrow you will eat
+      lunch before Bob?
+
+   (This is actually answered for you on the following page.)
+
+2) Page 5 (3 puzzles)
+      What path yields output 5 and final value 7.
+      What path yields output 7 and final value 7.
+      Is there a path that yields output y and final value 5? Can you
+         prove it?
+
+   In answering these questions, it would be the sequence of events, or
+   that a certain sequence is not possible.
+
+3) Page 6
+      Supposse that 100 threads run the following program concurrently.
+      ... [the program]
+      What is the largest possible value of count after all the threads
+      have cmompleted?
+      What is the smallest possible value?
+
+      Give some reason for your answers. It is harder to give reasons
+      for what cannot happen.  
+ 
+4) Page 6
+      Figure out a system of message passing (phone calls) that enforces
+      these restriants. Assume there are no clocks, and you cannot predict
+      when lunch will start or how long it will last. What is the minimum
+      number of messages that is required?
+
+

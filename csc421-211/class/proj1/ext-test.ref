@@ -1,0 +1,149 @@
+deq: empty
+enq: a
+ioc: 16 0 0 1
+deq: empty
+ioc: 16 1 0 0
+enq: a
+ioc: 16 0 0 1
+deq: a
+ioc: 16 1 0 0
+enq: a
+ioc: 16 0 0 1
+deq: a
+ioc: 16 1 0 0
+enq: b
+ioc: 16 0 0 1
+deq: b
+ioc: 16 1 0 0
+enq: c
+ioc: 16 0 0 1
+deq: c
+ioc: 16 1 0 0
+enq: d
+ioc: 16 0 0 1
+deq: d
+ioc: 16 1 0 0
+enq: e
+ioc: 16 0 0 1
+deq: e
+ioc: 16 1 0 0
+enq: f
+ioc: 16 0 0 1
+deq: f
+ioc: 16 1 0 0
+enq: g
+ioc: 16 0 0 1
+deq: g
+ioc: 16 1 0 0
+enq: h
+ioc: 16 0 0 1
+deq: h
+ioc: 16 1 0 0
+enq: i
+ioc: 16 0 0 1
+deq: i
+ioc: 16 1 0 0
+enq: j
+ioc: 16 0 0 1
+deq: j
+ioc: 16 1 0 0
+enq: k
+ioc: 16 0 0 1
+deq: k
+ioc: 16 1 0 0
+enq: l
+ioc: 16 0 0 1
+deq: l
+ioc: 16 1 0 0
+enq: m
+ioc: 16 0 0 1
+deq: m
+ioc: 16 1 0 0
+enq: n
+ioc: 16 0 0 1
+deq: n
+ioc: 16 1 0 0
+enq: o
+ioc: 16 0 0 1
+deq: o
+ioc: 16 1 0 0
+enq: p
+ioc: 16 0 0 1
+deq: p
+ioc: 16 1 0 0
+enq: q
+ioc: 16 0 0 1
+deq: q
+ioc: 16 1 0 0
+enq: r
+ioc: 16 0 0 1
+deq: r
+ioc: 16 1 0 0
+enq: s
+ioc: 16 0 0 1
+deq: s
+ioc: 16 1 0 0
+enq: t
+ioc: 16 0 0 1
+deq: t
+ioc: 16 1 0 0
+enq: a
+enq: b
+enq: c
+enq: d
+enq: e
+enq: f
+enq: g
+deq: a
+deq: b
+deq: c
+deq: d
+deq: e
+deq: f
+deq: g
+deq: empty
+deq: empty
+ioc: 16 1 0 0
+enq: h
+enq: i
+enq: j
+enq: k
+enq: l
+ioc: 16 0 0 5
+enq: m
+ioc: 16 0 0 6
+enq: n
+ioc: 16 0 0 7
+enq: o
+ioc: 16 0 0 8
+enq: p
+ioc: 16 0 0 9
+enq: q
+ioc: 16 0 0 10
+enq: r
+ioc: 16 0 0 11
+enq: s
+ioc: 16 0 0 12
+enq: t
+ioc: 16 0 0 13
+enq: u
+enq: v
+enq: w
+enq: full
+ioc: 16 0 1 16
+enq: full
+enq: full
+enq: full
+enq: full
+enq: full
+ioc: 16 0 1 16
+deq: h
+deq: i
+deq: j
+ioc: 16 0 0 13
+deq: k
+ioc: 16 0 0 12
+deq: l
+ioc: 16 0 0 11
+deq: m
+ioc: 16 0 0 10

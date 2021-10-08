@@ -1,0 +1,31 @@
+#
+# makefile for csc421-221
+# last-update: 
+#	5 sep 2016 -bjr: csc421-211
+#	21 seb 2021 -bjr: csc421-221
+# 
+
+T= no-test
+#T= ext-test
+
+RED= \033[0;31m
+GREEN= \033[0;32m
+NC= \033[0m
+M= -f Makefile-ext
+
+COPTS=
+
+build:
+	make clean
+	make build
+	make $M $T
+
+ext-test: ringbuf
+	./ringbuf -- -a+ > test.out
+	./ringbuf -- -+a+-+ >> test.out
+	./ringbuf a+-+b+-+c+-+d+-+e+-+f+-+g+-+h+-+i+-+j+-+k+-+l+-+m+-+n+-+o+-+p+-+q+-+r+-+s+-+t+-+ >> test.out
+	./ringbuf abcdefg---------+hijkl+m+n+o+p+q+r+s+t+uvwx+yz123+---+-+-+-+ >> test.out
+	diff test.out ext-test.ref
+
+no-test:
+	@echo "extended test not open"

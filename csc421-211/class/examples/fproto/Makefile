@@ -1,0 +1,4 @@
+
+
+all: fproto
+	rm fproto

@@ -1,0 +1,46 @@
+QUIZ 2
+
+Name:
+Grade:
+
+Date out: 27 sept
+Date due: 1 oct
+
+
+1a) Although different mechanisms might be involved to implement the hierarchy,
+   I have schedulable tasks in a priority hierarchy. Please list for me that
+   hierarchy. 
+   
+1b) What is prioritized by the priority of this list.
+
+2) Give a short defintion of the three basic concepts for scheduling:
+   a- concurrency
+   b- efficiency
+   c- latency
+   
+3) Among the types of scheduling classes are preemptible tasks and run-to-completion
+   tasks. Explain the difference, with a sample reason a task would be of one class
+   or another. 
+  
+4) Some tasks run in user-contest, and some in system context. Explain what these
+   contexts are and give an example tast that runs in each of the contexts.
+   
+5) Considering interrupt tasks, what is the top and the bottom of the task, and why
+   are interrupt tasks divided this way? Give an example.
+   
+   The example can be something you suppose might be true but illustrates the 
+   concept. You do not need to find an actual, in code, example.
+
+EXTRA CREDIT
+
+Give the structure name and field name  for were linux stores the scheduling priority
+for a task. Please give the filename, path to the file in the linux source tree,and 
+line number.
+
+   Hints:
+
+   (a) The nice command is a syscall that implements a scheduling adjustment. 
+       Begin your search for what call implements the nice syscall in the linux
+       directory "kernel"
+   (b) A probably struct name from (a) might be found in a source code cross-reference
+       such as elixir.bootlin.com

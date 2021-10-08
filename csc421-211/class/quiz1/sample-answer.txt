@@ -1,0 +1,13 @@
+./stack-hopping
+downwards:  6
+downwards:  5
+downwards:  4
+downwards:  3
+downwards:  2
+downwards:  1
+downwards:  0
+upwards:  0
+upwards:  1
+upwards:  2
+stack hopped!
+make: *** [stack-hop] Segmentation fault: 11

@@ -1,0 +1,17 @@
+class: csc421-221
+project: proj0
+student: 
+date:
+
+grade: _/3
+
+passes basic test (#):		_/3
+lateness:  			(0)/(2)
+
+(#)
+- passes basic test
+	passed make test
+
+commit:
+
+comments:

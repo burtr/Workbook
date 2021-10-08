@@ -1,0 +1,26 @@
+class: csc421-221
+project: proj1
+student: 
+date:
+
+grade: _/5
+
+passes basic test (#):		_/3
+passes extended test(%):	_/2
+lateness:		(0)/(4)
+
+(#)
+- passes basic test
+	makefile test
+
+(%)
+- passes extended test 
+	makefile-ext ext-test
+
+
+
+commit:
+
+
+comments:
+
