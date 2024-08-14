@@ -13,7 +13,7 @@ NETWORK= sepolia
 NETWORK= localhost
 
 IGNITION_MODULE= none
-SCRIPT= boom-test-deply.js
+SCRIPT= boom-test-deploy.js
 
 run:
 	npx hardhat run --network ${NETWORK} scripts/${SCRIPT}
@@ -34,9 +34,11 @@ init:
 	npm hardhat init
 	npm install --save-dev @nomicfoundation/hardhat-toolbox
 	npm install --save-dev @nomicfoundation/hardhat-ethers ethers
+	npm install --save-dev @nomicfoundation/hardhat-ignition-ethers
 	-rm addto-hardhat.config.js
 	echo "require(\"@nomicfoundation/hardhat-ethers\");" >> addto-hardhat.config.js
 	echo "require(\"@nomicfoundation/hardhat-toolbox\");" >> addto-hardhat.config.js
+	echo "require(\"@nomicfoundation/hardhat-ignition-ethers\");" >> addto-hardhat.config.js
 
 set-config:
 	echo "this will prompt for the Infura Key and your wallet private key"
