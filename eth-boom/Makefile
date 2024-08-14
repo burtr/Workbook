@@ -12,13 +12,13 @@
 NETWORK= sepolia
 NETWORK= localhost
 
-IGNITION_MODULE= boom.js
+IGNITION_MODULE= none
 SCRIPT= boom-test-deply.js
 
 run:
 	npx hardhat run --network ${NETWORK} scripts/${SCRIPT}
 
-deploy:
+ignition:
 	npx hardhat ignition deploy --network ${NETWORK} ignition/modules/${IGNITION_MODULE}
 
 compile:
